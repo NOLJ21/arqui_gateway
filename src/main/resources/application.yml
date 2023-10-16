@@ -1,0 +1,29 @@
+server:
+  port: 8282
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8714/eureka/
+
+
+spring:
+  application:
+    name: gateway-service
+
+  cloud:
+    gateway:
+      routes:
+        - id: users
+          uri: lb://users
+          predicates:
+            - Path=/user-service/**
+          filters:
+            - RewritePath=/user-service/(?<path>.*), /$\{path}
+
+        - id: reserves
+          uri: lb://reserves
+          predicates:
+            - Path=/reserve-service/**
+          filters:
+            - RewritePath=/reserve-service/(?<path>.*), /$\{path}
