@@ -1,10 +1,10 @@
 server:
-  port: 8282
+  port: ${PORT:8282}
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8714/eureka/
+      defaultZone: ${EUREKA_URL:http://localhost:8714/eureka/}
 
 
 spring:
